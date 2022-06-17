@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="title">
-            <h1>{{msg}}</h1>
+            <h1>{{msg}}/{{$route.params.id}}</h1>
         </div>
     </div>
 </template>
@@ -11,7 +11,7 @@ export default {
     name:"home",
     data(){
         return{
-            msg:"欢迎来到首页Home"
+            msg:"Edit页"
         }
     }
 }

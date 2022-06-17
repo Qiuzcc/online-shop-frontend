@@ -11,7 +11,7 @@ export default {
     name:"home",
     data(){
         return{
-            msg:"欢迎来到首页Home"
+            msg:"New页"
         }
     }
 }

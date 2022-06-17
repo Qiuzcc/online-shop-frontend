@@ -11,7 +11,7 @@ export default {
     name:"home",
     data(){
         return{
-            msg:"欢迎来到首页Home"
+            msg:"欢迎来到购物车页Cart"
         }
     }
 }
