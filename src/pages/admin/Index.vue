@@ -8,7 +8,10 @@
               <router-link to="/admin">View Products</router-link>
             </li>
             <li>
-              <router-link to="/admin/new">New Products</router-link>
+              <router-link to="/admin/new/product">New Product</router-link>
+            </li>
+            <li>
+              <router-link to="/admin/new/manufacturer">New Manufacturer</router-link>
             </li>
           </ul>
         </div>

@@ -5,8 +5,8 @@ import Cart from '@/pages/Cart'
 
 import Index from '@/pages/admin/Index'
 import Products from '@/pages/Products'
-import New from '@/pages/admin/New'
-import Edit from '@/pages/admin/Edit'
+import NewProduct from '@/pages/admin/NewProduct'
+import NewManufacturer from '@/pages/admin/NewManufacturer'
 
 Vue.use(Router)
 
@@ -33,15 +33,15 @@ export default new Router({
           component:Products
         },
         {
-          path:'new',
-          name:'New',
-          component:New
+          path:'new/product',
+          name:'NewProduct',
+          component:NewProduct
         },
         {
-          path:'edit/:id',
-          name:'Edit',
-          component:Edit
-        }
+          path:'new/manufacturer',
+          name:'NewManufacturer',
+          component:NewManufacturer
+        },
       ]
     }
   ]
