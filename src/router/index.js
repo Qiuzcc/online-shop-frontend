@@ -4,7 +4,7 @@ import Home from '@/pages/Home'
 import Cart from '@/pages/Cart'
 
 import Index from '@/pages/admin/Index'
-import Products from '@/pages/Products'
+import Products from '@/pages/admin/Products'
 import NewProduct from '@/pages/admin/NewProduct'
 import NewManufacturer from '@/pages/admin/NewManufacturer'
 
