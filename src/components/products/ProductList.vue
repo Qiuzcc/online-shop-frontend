@@ -30,6 +30,11 @@ export default {
   },
   components:{
     'product-item':ProductItem
-  }
+  },
+  created(){
+    if(this.products.length===0){
+      this.$store.dispatch('allProducts')
+    }
+  },
 };
 </script>
