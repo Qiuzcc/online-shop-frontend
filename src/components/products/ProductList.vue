@@ -25,7 +25,7 @@ export default {
   name: "product-list",
   computed: {
     products() {
-      return this.$store.state.products;
+      return this.$store.getters.allProducts;
     },
   },
   components:{

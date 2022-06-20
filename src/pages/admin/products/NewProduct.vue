@@ -2,8 +2,7 @@
   <product-form
     @save-product="addProduct"
     :model="model"
-    :manufacturers="manufacturers"
-    :isEditing="true"
+    :isExisted="false"
   >
   </product-form>
 </template>
@@ -18,21 +17,13 @@ export default {
   data() {
     return {
       model: {},
-      manufacturers: [
-        {
-          _id: "sam",
-          name: "Samsung",
-        },
-        {
-          _id: "apple",
-          name: "Apple",
-        },
-      ],
-    };
+    }
   },
   methods: {
     addProduct(model) {
-      console.log("model", model);
+      this.$store.dispatch('addProduct',{
+        product:model
+      })
     },
   },
 };

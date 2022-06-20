@@ -8,16 +8,16 @@
             type="text"
             placeholder="厂商名称"
             name="name"
-            v-model="model.name"
             class="form-control"
+            v-model="manufacturer.name"
           />
         </div>
       </div>
       <div class="form-group new-button">
         <button class="button">
           <i class="fa fa-pencil"></i>
-          <span v-if="isEditing">添加厂商</span>
-          <span v-else>更新厂商信息</span>
+          <span v-if="isExisted">更新厂商信息</span>
+          <span v-else>添加厂商</span>
         </button>
       </div>
     </form>
@@ -26,11 +26,11 @@
 
 <script>
 export default {
-  props: ["model", "isEditing"],
+  props: ['manufacturer','isExisted'],
   methods: {
     saveManufacturer() {
-      this.$emit("save-manufacturer", this.model);
-    },
+      this.$emit('save-manufacturer',this.manufacturer);   //在script内部引用props里的变量需要在前面加上this.
+    }
   },
 };
 </script>
