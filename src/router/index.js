@@ -47,16 +47,6 @@ export default new Router({
           component:Manufacturers
         },
         {
-          path:'manufacturers/edit/:id',
-          name:'EditManufacturer',
-          component:EditManufacturer
-        },
-        {
-          path:'products/edit/:id',
-          name:'EditProduct',
-          component:EditProduct
-        },
-        {
           path:'new/product',
           name:'NewProduct',
           component:NewProduct
@@ -65,6 +55,16 @@ export default new Router({
           path:'new/manufacturer',
           name:'NewManufacturer',
           component:NewManufacturer
+        },
+        {
+          path:'manufacturers/edit/:id',
+          name:'EditManufacturer',
+          component:EditManufacturer
+        },
+        {
+          path:'products/edit/:id',
+          name:'EditProduct',
+          component:EditProduct
         },
       ]
     }

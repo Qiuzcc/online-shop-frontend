@@ -2,9 +2,7 @@
   <div>
     <div class="products">
       <div class="container">商品列表</div>
-      <template v-for="product in products">
-        <product-item :key="product._id" :product="product"></product-item>
-      </template>
+        <product-item :products="products"></product-item>
     </div>
   </div>
 </template>
