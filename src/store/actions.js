@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Message } from "element-ui";
 
 import {
     ALL_PRODUCTS,
@@ -53,6 +54,12 @@ export const productActions = {
             commit(REMOVE_FROM_PRODUCTS_SUCCESS,{
                 productId
             });
+            Message({
+                message:'删除成功！',
+                type:'success'
+            })
+        }).catch(()=>{
+            Message.error('出了点小故障，删除失败了！');
         })
     },
     addProduct({commit},payload){
@@ -61,7 +68,13 @@ export const productActions = {
         axios.post(`${API_BASE}/products`,newProduct).then(()=>{
             commit(ADD_PRODUCT_SUCCESS,{
                 newProduct
+            });
+            Message({
+                message:'添加成功！',
+                type:'success'
             })
+        }).catch(()=>{
+            Message.error('出了点小故障，商品添加失败！');
         })
     },
     updateProduct({commit},payload){
@@ -70,7 +83,13 @@ export const productActions = {
         axios.put(`${API_BASE}/products/${newProduct._id}`,newProduct).then(()=>{
             commit(UPDATE_PRODUCT_SUCCESS,{
                 product:newProduct,
+            });
+            Message({
+                message:'更新成功！',
+                type:'success'
             })
+        }).catch(()=>{
+            Message.error('出了点小故障，更新失败了！');
         })
     },
 }
@@ -90,7 +109,13 @@ export const manufacturersActions = {
         axios.delete(`${API_BASE}/manufacturers/${manufacturerId}`).then(response => {
             commit(REMOVE_FROM_MANUFACTURERS_SUCCESS, {
                 manufacturerId
+            });
+            Message({
+                message:'删除成功！',
+                type:'success'
             })
+        }).catch(()=>{
+            Message.error('出了点小故障，删除失败了！');
         })
     },
     manufacturerById({ commit }, payload) {
@@ -109,6 +134,12 @@ export const manufacturersActions = {
             commit(UPDATE_MANUFACTURER_SUCCESS, {
                 manufacturer,
             });
+            Message({
+                message:'更新成功！',
+                type:'success'
+            })
+        }).catch(()=>{
+            Message.error('出了点小故障，更新失败了！');
         })
     },
     addManufacturer({ commit }, payload){
@@ -118,6 +149,12 @@ export const manufacturersActions = {
             commit(ADD_MANUFACTURER_SUCCESS, {
                 manufacturer,
             });
+            Message({
+                message:'添加成功！',
+                type:'success'
+            })
+        }).catch(()=>{
+            Message.error('出了点小故障，生产厂商添加失败了！');
         })
     }
 }

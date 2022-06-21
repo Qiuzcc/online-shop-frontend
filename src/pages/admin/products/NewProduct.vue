@@ -16,7 +16,9 @@ export default {
   },
   data() {
     return {
-      model: {},
+      model: {manufacturer:{name:''}}   
+      //需要给其一个默认初始形式 model: {manufacturer: {name: ' '}}，防止在子组件表单中无法访问 name 属性导致报错
+      //不过在使用element ui组件之前是并不需要的，这是el ui的区别
     }
   },
   methods: {

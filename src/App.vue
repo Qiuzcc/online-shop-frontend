@@ -12,7 +12,7 @@
       <el-menu-item index="1"
         ><router-link to="/">首页</router-link></el-menu-item
       >
-      <el-menu-item index="2">
+      <el-submenu index="2">
         <template slot="title">管理</template>
         <el-menu-item index="2-1"
           ><router-link to="/admin" tag="div"
@@ -34,7 +34,7 @@
             >添加生产商</router-link
           ></el-menu-item
         >
-      </el-menu-item>
+      </el-submenu>
       <el-menu-item index="3"
         ><router-link to="/cart" tag="div">购物车</router-link></el-menu-item
       >
@@ -67,7 +67,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 .el-submenu__title {
   margin-left: 40px;

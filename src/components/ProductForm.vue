@@ -1,90 +1,63 @@
 <template>
-  <form @submit.prevent="saveProduct">
-    <div col-lg-5 col-md-5 col-sm-12 col-xs-12>
-      <div class="form-group">
-        <label for="name">名称</label>
-        <input
-          type="text"
-          name="name"
-          placeholder="name"
-          v-model="model.name"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="price">价格</label>
-        <input
-          type="number"
-          name="price"
-          placeholder="price"
-          v-model="model.price"
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="manufacturer">厂商</label>
-        <select
-          name="manufacturer"
-          type="text"
-          class="form-control"
-          v-model="model.manufacturer"
+  <div class="productInfo">
+    <el-form
+      class="form"
+      ref="form"
+      label-width="180px"
+      v-loading="loading"
+      element-loading-text="拼命加载中"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(0,0,0,0.8)"
+    >
+      <el-form-item label="Name">
+        <el-input v-model="modelData.name"></el-input>
+      </el-form-item>
+      <el-form-item label="Price">
+        <el-input v-model="modelData.price"></el-input>
+      </el-form-item>
+      <el-form-item label="Manufacturer">
+        <el-select
+          v-model="modelData.manufacturer.name"
+          clearable
+          placeholder="请选择生产厂商"
         >
-          <template v-for="manufacturer in manufacturers">
-            <option
-              :value="manufacturer"
-              :key="manufacturer._id"
-              :selected="
-                manufacturer._id ==
-                (model.manufacturer && model.manufacturer._id)
-              "
-            >
-              {{ manufacturer.name }}
-            </option>
-          </template>
-        </select>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-      <div class="form-group">
-        <label for="image">Image</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Image"
-          v-model="model.image"
-          name="image"
-        />
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="description">Description</label>
-      <textarea
-        name="description"
-        rows="5"
-        placeholder="Description"
-        v-model="model.description"
-      ></textarea>
-    </div>
-
-    <div class="form-group new-button">
-      <button class="button">
-        <i class="fa fa-pencil"></i>
-        <span v-if="isExisted">更新商品信息</span>
-        <span v-else>添加商品</span>
-      </button>
-    </div>
-  </form>
+          <el-option
+            v-for="manufacturer in manufacturers"
+            :key="manufacturer._id"
+            :label="manufacturer.name"
+            :value="manufacturer.name"
+          >
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="Image">
+        <el-input v-model="modelData.image"></el-input>
+      </el-form-item>
+      <el-form-item label="Description">
+        <el-input type="textarea" v-model="modelData.description"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button v-if="isExisted" type="primary" native-type="submit" @click="onSubmit"
+          >更新商品信息</el-button
+        >
+        <el-button v-else @click="onSubmit">添加商品</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>
 export default {
   name: "product-form",
-  props: ["model", "isExisted"],
+  props: ["isExisted", "model"],
   methods: {
-    saveProduct() {
-      this.$emit("save-product", this.model);
+    onSubmit() {
+      const manufacturer = this.manufacturers.find(
+        (item) => item.name === this.modelData.manufacturer.name
+      );
+      this.modelData.manufacturer = manufacturer;
+
+      this.$emit("save-product", this.modelData);
       //定义一个对外的函数名参数接口，用来接受父组件传进来的函数
       //把model传递给父组件
     },
@@ -93,11 +66,41 @@ export default {
     manufacturers() {
       return this.$store.getters.allManufacturers;
     },
+    loading(){
+      return this.$store.state.showLoader
+    }
+  },
+  data() {
+    return {
+      modelData: { manufacturer: { name: "" } },
+    };
   },
   created() {
+    this.modelData = {
+      ...this.model,
+      manufacturer: { ...this.model.manufacturer },
+    };
     if (this.$store.getters.allManufacturers.length === 0) {
       this.$store.dispatch("allManufacturers");
     }
   },
+  watch: {
+    model(val, oldVal) {
+      this.modelData = val;
+    },
+  },
 };
 </script>
+
+<style>
+.productInfo {
+  padding-top: 10px;
+}
+.form {
+  margin: 0 auto;
+  width: 500px;
+}
+.el-input__inner {
+  height: 60px;
+}
+</style>

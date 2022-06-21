@@ -5,8 +5,8 @@
     </div>
     <product-form
       @save-product="updateProduct"
-      :model="product"
       :isExisted="true"
+      :model="product"
     >
     </product-form>
   </div>
@@ -16,21 +16,30 @@
 import ProductForm from "@/components/ProductForm.vue";
 export default {
   name: "edit-product",
+  computed:{
+    product() {
+      let product = this.$store.getters.productById(this.$route.params["id"]);
+      return { ...product ,manufacturer:{...product.manufacturer}};    
+      //返回的是product的深拷贝，为了保证在点击确认之前不修改本地的product
+    }
+  },
   components: {
     "product-form": ProductForm,
   },
-  computed: {
-    product() {
-      let product = this.$store.getters.productById(this.$route.params["id"]);
-      return { ...product };    //返回的是product的拷贝，为了保证在点击确认之前不修改本地的product
-    },
-  },
   methods: {
-    updateProduct(model) {
+    updateProduct(product) {
         this.$store.dispatch('updateProduct',{
-            product:model
+            product
         })
     },
   },
+  created(){
+    const {name=""} = this.product || {};
+    if(!name){
+      this.$store.dispatch('productById',{
+        productId:this.$route.params["id"]
+      })
+    }
+  }
 };
 </script>

@@ -3,9 +3,7 @@
     <div class="title">
       <h1>购物车</h1>
     </div>
-    <template v-for="product in cart">
-      <product-item :key="product._id" :product="product"></product-item>
-    </template>
+    <product-item :products="cart"></product-item>
   </div>
 </template>
 
