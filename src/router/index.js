@@ -12,6 +12,10 @@ import NewManufacturer from '@/pages/admin/manufacturers/NewManufacturer'
 import EditManufacturer from '@/pages/admin/manufacturers/EditManufacturer'
 import EditProduct from '@/pages/admin/products/EditProduct'
 
+import UserIndex from '@/pages/user/Index'
+import Login from "@/pages/user/Login";
+import Setting from "@/pages/user/Setting";
+
 Vue.use(Router)
 
 export default new Router({
@@ -66,6 +70,23 @@ export default new Router({
           name:'EditProduct',
           component:EditProduct
         },
+      ]
+    },
+    {
+      path:'/user',
+      name:'User',
+      component:UserIndex,
+      children:[
+        {
+          path:'login',
+          name:'Login',
+          component:Login
+        },
+        {
+          path:'settings',
+          name:'Settings',
+          component:Setting
+        }
       ]
     }
   ]
